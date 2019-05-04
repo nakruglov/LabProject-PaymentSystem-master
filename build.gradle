@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+apply plugin: 'war'
+
+group 'com.epam.lab'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.5.39'
+    compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '8.5.39'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.2.0'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+
+    compile("javax.servlet:jstl:1.2")
+    compile("javax.servlet.jsp:javax.servlet.jsp-api:2.3.3")
+    compile("javax.servlet:javax.servlet-api:3.1.0")
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+
+
+
+}
+war {
+    archiveName = 'bank.war'
+}
+
+test {
+    useJUnitPlatform()
+}
+task myTask(type:Exec) {
+    group 'build'
+    dependsOn 'clean'
+    dependsOn 'war'
+    workingDir '.'
+    commandLine './myScript.sh'
+}
