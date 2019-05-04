@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-ERROR
+ERROR ERROR
 </body>
 </html>
